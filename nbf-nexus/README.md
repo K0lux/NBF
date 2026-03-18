@@ -1,4 +1,4 @@
-# 🪐 NBF Nexus
+#NBF Nexus
 
 <p align="center">
   <img src="public/logo.png" alt="NBF Nexus Logo" width="200" />
