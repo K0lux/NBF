@@ -8,21 +8,11 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 **The Open-Source Flex-Office & AI Mentorship OS for Startups and Incubators.**
-Built with Next.js 15, Supabase (pgvector) & Vercel AI SDK.
+Built with Next.js 16.1, Supabase (pgvector) & Vercel AI SDK.
 
 ---
 
-### 📖 The Origin Story (Why this exists)
-I originally joined **New Brain Factory (NBF)** in Togo 🇹🇬 for my final-year Cybersecurity internship. My actual thesis? Building a Defensive Cyber Range using KYPO, Security Onion, and Caldera.
-
-But as a software engineer, I noticed our hub accepted 30+ interns (Remote, Hybrid, On-site), while we only had **12 physical desks**. The administration was overwhelmed, and every new intern waited up to 24 hours just to get onboarded. Mentors were a bottleneck, repeating the same briefings over and over.
-
-Instead of ignoring it, I paused my Cyber Range project and built **NBF Nexus**. 
-Today, it runs the hub. The AI Agent handles onboarding 24/7, and the system enforces the physical desk limits perfectly. We are open-sourcing it so no other startup incubator has to suffer through manual management again.
-
----
-
-### 🚀 Key Features
+###  Key Features
 - **Smart Resource Allocation**: Strictly manages physical desk limits (ex: 12 chairs for 30+ people).
 - **AI Mentorship (RAG)**: An AI agent connected to your Google Drive/Docs to answer intern questions 24/7.
 - **Dynamic QR Attendance**: Fraud-proof attendance tracking via dynamic QR codes and Geolocation.
@@ -31,7 +21,7 @@ Today, it runs the hub. The AI Agent handles onboarding 24/7, and the system enf
 
 ---
 
-### 🏗️ Architecture: Feature-Sliced Design (FSD)
+###  Architecture: Feature-Sliced Design (FSD)
 NBF Nexus follows the **FSD** architectural pattern for maximum maintainability and scale:
 - **`app/`**: Next.js routing & global providers.
 - **`pages/`**: Full page compositions.
@@ -42,7 +32,7 @@ NBF Nexus follows the **FSD** architectural pattern for maximum maintainability 
 
 ---
 
-### 🛠️ Quick Setup
+###  Quick Setup
 
 1. **Clone the repository**
    ```bash
@@ -65,7 +55,7 @@ NBF Nexus follows the **FSD** architectural pattern for maximum maintainability 
 
 ---
 
-### 📄 License
+###  License
 Distributed under the **MIT License**. See `LICENSE` for more information.
 
 ---
