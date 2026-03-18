@@ -1,6 +1,6 @@
 # 🪐 NBF Nexus
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FK0lux%2FNBF&env=NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,CLERK_SECRET_KEY,NEXT_PUBLIC_SUPABASE_URL,NEXT_PUBLIC_SUPABASE_ANON_KEY,SUPABASE_SERVICE_ROLE_KEY,OPENAI_API_KEY,DATABASE_URL)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FK0lux%2Fnbf-nexus&env=NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,CLERK_SECRET_KEY,NEXT_PUBLIC_SUPABASE_URL,NEXT_PUBLIC_SUPABASE_ANON_KEY,SUPABASE_SERVICE_ROLE_KEY,OPENAI_API_KEY,DATABASE_URL)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 **The Open-Source Flex-Office & AI Mentorship OS for Startups and Incubators.**
@@ -40,8 +40,7 @@ NBF Nexus follows the **FSD** architectural pattern for maximum maintainability 
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/K0lux/NBF.git
-   cd nbf-nexus
+   git clone https://github.com/K0lux/nbf-nexus.git
    ```
 
 2. **Install dependencies**
