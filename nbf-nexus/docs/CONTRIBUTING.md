@@ -2,7 +2,7 @@
 
 Merci de vouloir contribuer à **NBF Nexus** ! Nous sommes un projet Open Source né au Togo 🇹🇬 et nous accueillons toutes les contributions.
 
-## 🛠 Installation Locale (Development)
+## Installation Locale (Development)
 
 ### Prérequis
 - **Node.js 20+**
