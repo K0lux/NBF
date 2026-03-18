@@ -1,6 +1,17 @@
 import { Attendance, AttendanceMethod } from '../model/types';
 
+/**
+ * Service API pour gérer la présence des stagiaires.
+ */
 export const attendanceApi = {
+  /**
+   * Enregistre l'arrivée d'un stagiaire pour une séance planifiée.
+   * @param scheduleId - ID de la séance planifiée.
+   * @param profileId - ID du profil utilisateur Clerk.
+   * @param method - Méthode de pointage (ex: QR_CODE, GEOLOCATION).
+   * @param coords - Coordonnées GPS optionnelles pour la validation par zone.
+   * @throws {Error} Si l'enregistrement échoue sur le serveur.
+   */
   async checkIn(
     scheduleId: string, 
     profileId: string, 
@@ -21,6 +32,12 @@ export const attendanceApi = {
     return (await response.json()) as Attendance;
   },
 
+  /**
+   * Enregistre le départ d'un stagiaire.
+   * @param attendanceId - ID de l'enregistrement de présence existant.
+   * @param method - Méthode utilisée pour le départ.
+   * @param coords - Coordonnées GPS optionnelles.
+   */
   async checkOut(
     attendanceId: string, 
     method: AttendanceMethod,
@@ -40,6 +57,9 @@ export const attendanceApi = {
     return (await response.json()) as Attendance;
   },
 
+  /**
+   * Récupère le log de présence pour une séance spécifique.
+   */
   async getAttendanceByScheduleId(scheduleId: string): Promise<Attendance | null> {
     const response = await fetch(`/api/attendance?type=by-schedule&scheduleId=${scheduleId}`)
     if (!response.ok) {
@@ -51,6 +71,9 @@ export const attendanceApi = {
     return (await response.json()) as Attendance | null;
   },
 
+  /**
+   * Récupère la liste des logs de présence d'un profil.
+   */
   async getAttendanceByProfileId(profileId: string): Promise<Attendance[]> {
     const response = await fetch(`/api/attendance?type=by-profile&profileId=${profileId}`)
     if (!response.ok) {
@@ -62,6 +85,9 @@ export const attendanceApi = {
     return (await response.json()) as Attendance[];
   },
 
+  /**
+   * Récupère l'historique de présence avec les dates de planning associées.
+   */
   async getAttendanceHistoryByProfileId(profileId: string): Promise<(Attendance & { schedule: { scheduled_date: string } })[]> {
     const response = await fetch(`/api/attendance?type=history&profileId=${profileId}`)
     if (!response.ok) {
@@ -73,6 +99,9 @@ export const attendanceApi = {
     return (await response.json()) as any;
   },
 
+  /**
+   * Récupère les présences du jour (utilisé par le Dashboard Admin).
+   */
   async getTodayAttendances(): Promise<(Attendance & { profile: { full_name: string; specialty: string }; schedule: { scheduled_date: string } })[]> {
     const response = await fetch('/api/attendance?type=today')
     if (!response.ok) {
@@ -84,6 +113,9 @@ export const attendanceApi = {
     return (await response.json()) as any;
   },
 
+  /**
+   * Filtre les présences selon plusieurs critères (dates, profil, spécialité).
+   */
   async getFilteredAttendances(filters: {
     startDate?: string;
     endDate?: string;
