@@ -12,7 +12,7 @@ Built with Next.js 15, Supabase (pgvector) & Vercel AI SDK.
 
 ---
 
-### 📖 The Origin Story (Why this exists)
+### The Origin Story (Why this exists)
 I originally joined **New Brain Factory (NBF)** in Togo 🇹🇬 for my final-year Cybersecurity internship. My actual thesis? Building a Defensive Cyber Range using KYPO, Security Onion, and Caldera.
 
 But as a software engineer, I noticed our hub accepted 30+ interns (Remote, Hybrid, On-site), while we only had **12 physical desks**. The administration was overwhelmed, and every new intern waited up to 24 hours just to get onboarded. Mentors were a bottleneck, repeating the same briefings over and over.
