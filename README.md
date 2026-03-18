@@ -8,7 +8,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 **The Open-Source Flex-Office & AI Mentorship OS for Startups and Incubators.**
-Built with Next.js 15, Supabase (pgvector) & Vercel AI SDK.
+Built with Next.js 16.1, Supabase (pgvector) & Vercel AI SDK.
 
 ---
 
