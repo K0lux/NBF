@@ -5,7 +5,7 @@ import { QRCodeSVG } from "qrcode.react"
 import { Button } from "@/shared/ui/button"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/shared/ui/dialog"
 import { QrCode, RefreshCw } from "lucide-react"
-import { generateAttendanceToken } from "@/entities/attendance/lib/attendanceTokens"
+import { toast } from "sonner"
 import { env } from "@/shared/config/env"
 
 interface GenerateAttendanceQRProps {
@@ -21,16 +21,31 @@ export function GenerateAttendanceQR({ scheduleId, profileId, traineeName }: Gen
   const handleGenerate = async () => {
     setLoading(true)
     try {
-      const newToken = await generateAttendanceToken({ scheduleId, profileId })
-      setToken(newToken)
+      const response = await fetch("/api/attendance/token", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ scheduleId, profileId }),
+      })
+      if (!response.ok) {
+        throw new Error(await response.text())
+      }
+      const data = await response.json()
+      setToken(data.token)
     } catch (err) {
       console.error("Failed to generate token:", err)
+      toast.error("Failed to generate QR token")
     } finally {
       setLoading(false)
     }
   }
 
-  const qrUrl = token ? `${env.NEXT_PUBLIC_APP_URL}/attendance/check-in?token=${token}` : ""
+  const appOrigin =
+    env.NEXT_PUBLIC_APP_URL && env.NEXT_PUBLIC_APP_URL.trim().length > 0
+      ? env.NEXT_PUBLIC_APP_URL
+      : typeof window !== "undefined"
+        ? window.location.origin
+        : ""
+  const qrUrl = token ? `${appOrigin}/attendance/check-in?token=${token}` : ""
 
   return (
     <Dialog onOpenChange={(open) => open && !token && handleGenerate()}>
@@ -48,11 +63,11 @@ export function GenerateAttendanceQR({ scheduleId, profileId, traineeName }: Gen
             Scan this code to check in <strong>{traineeName}</strong> for this session.
           </p>
           
-          <div className="bg-white p-4 rounded-lg shadow-sm border">
+          <div className="bg-white text-black p-4 rounded-lg shadow-sm border">
             {token ? (
               <QRCodeSVG value={qrUrl} size={256} level="H" includeMargin={true} />
             ) : (
-              <div className="h-[256px] w-[256px] flex items-center justify-center bg-muted animate-pulse rounded">
+              <div className="h-[256px] w-[256px] flex items-center justify-center bg-muted animate-pulse rounded text-black">
                 Generating...
               </div>
             )}

@@ -8,6 +8,20 @@ NBF Nexus is an integrated web platform designed for the New Brain Factory (NBF)
 *   **Architecture:** Feature-Sliced Design (FSD).
 *   **Tech Stack:** Next.js 16.1, Supabase, Clerk, Vercel AI SDK.
 
+## Architecture: Feature-Sliced Design (FSD)
+
+L'architecture Feature-Sliced Design (FSD) divise le projet en 7 couches (layers) avec une hiérarchie stricte (une couche ne peut importer que des éléments de couches inférieures). Voici la responsabilité de chaque dossier :
+
+1.  **app/** (La couche de configuration) : Point d'entrée, providers globaux (Clerk, Theme), styles globaux, et routage Next.js (layout.tsx / page.tsx). Ces fichiers appellent les composants de la couche `pages`.
+2.  **pages/** (Les routes logiques) : Composition complète d'une page en assemblant widgets et features. Gère le Data Fetching.
+3.  **widgets/** (Les grands blocs autonomes) : Combine des entités et fonctionnalités pour créer des sections complexes (ex: Navigation, Dashboard).
+4.  **features/** (Les actions utilisateur) : Interactions avec valeur commerciale (ex: `invite-trainee`, `generate-qr`). Contient la logique de mutation.
+5.  **entities/** (Le domaine métier) : Définit les objets métier (User, Attendance, Schedule). Contient l'UI simple, les schémas et types.
+6.  **shared/** (Le socle technique) : Réutilisable et indépendant du métier. Contient le Design System (`ui/`), les instances API (`api/`) et utilitaires (`lib/`).
+7.  **processes/** (Optionnel) : Flux multi-pages complexes (souvent intégré dans `app` ou `features` en Next.js).
+
+**Règle d'or (Public API) :** Chaque dossier doit avoir un fichier `index.ts` qui expose uniquement le nécessaire. On n'importe jamais un fichier interne directement (ex: `@/entities/user/ui/card`), on passe par l'index (`@/entities/user`).
+
 ## Key Documentation
 
 *   **Master Plan:** [nbf_nexus_architecture_and_roadmap.md](plans/nbf_nexus_architecture_and_roadmap.md) - Contains the detailed directory structure, logical architecture, and the 37-issue implementation roadmap.

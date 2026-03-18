@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🪐 NBF Nexus
 
-## Getting Started
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FK0lux%2FNBF&env=NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,CLERK_SECRET_KEY,NEXT_PUBLIC_SUPABASE_URL,NEXT_PUBLIC_SUPABASE_ANON_KEY,SUPABASE_SERVICE_ROLE_KEY,OPENAI_API_KEY,DATABASE_URL)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-First, run the development server:
+**The Open-Source Flex-Office & AI Mentorship OS for Startups and Incubators.**
+Built with Next.js 15, Supabase (pgvector) & Vercel AI SDK.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 📖 The Origin Story (Why this exists)
+I originally joined **New Brain Factory (NBF)** in Togo 🇹🇬 for my final-year Cybersecurity internship. My actual thesis? Building a Defensive Cyber Range using KYPO, Security Onion, and Caldera.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+But as a software engineer, I noticed our hub accepted 30+ interns (Remote, Hybrid, On-site), while we only had **12 physical desks**. The administration was overwhelmed, and every new intern waited up to 24 hours just to get onboarded. Mentors were a bottleneck, repeating the same briefings over and over.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Instead of ignoring it, I paused my Cyber Range project and built **NBF Nexus**. 
+Today, it runs the hub. The AI Agent handles onboarding 24/7, and the system enforces the physical desk limits perfectly. We are open-sourcing it so no other startup incubator has to suffer through manual management again.
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+### 🚀 Key Features
+- **Smart Resource Allocation**: Strictly manages physical desk limits (ex: 12 chairs for 30+ people).
+- **AI Mentorship (RAG)**: An AI agent connected to your Google Drive/Docs to answer intern questions 24/7.
+- **Dynamic QR Attendance**: Fraud-proof attendance tracking via dynamic QR codes and Geolocation.
+- **Unified Workflows**: Centralized request management for absences, permissions, and schedule changes.
+- **Zero-Cost Operation**: Runs 100% on Free Tiers (Vercel, Supabase, Clerk).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 🏗️ Architecture: Feature-Sliced Design (FSD)
+NBF Nexus follows the **FSD** architectural pattern for maximum maintainability and scale:
+- **`app/`**: Next.js routing & global providers.
+- **`pages/`**: Full page compositions.
+- **`widgets/`**: Complex UI blocks (Dashboard, Calendar).
+- **`features/`**: User actions (Check-in, Request creation).
+- **`entities/`**: Domain business logic (Trainee, Schedule).
+- **`shared/`**: Atomic UI & technical utilities.
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 🛠️ Quick Setup
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/K0lux/NBF.git
+   cd nbf-nexus
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Environment Variables**
+   Rename `.env.example` to `.env.local` and fill in your keys for Clerk, Supabase, and OpenAI.
+
+4. **Run Development Server**
+   ```bash
+   npm run dev
+   ```
+
+---
+
+### 📄 License
+Distributed under the **MIT License**. See `LICENSE` for more information.
+
+---
+
+**Built with ❤️ by [K0lux](https://github.com/K0lux) at New Brain Factory.**

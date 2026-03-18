@@ -1,112 +1,91 @@
-import { SupabaseClient } from '@supabase/supabase-js';
 import { Request, RequestType, RequestStatus, RequestWithTrainee } from '../model/types';
 
 export const requestApi = {
   async createRequest(
-    supabase: SupabaseClient,
+    _supabase: unknown,
     profileId: string, 
     type: RequestType, 
     title: string, 
     description: string, 
     metadata: Record<string, any> = {}
   ): Promise<Request> {
-    const { data, error } = await supabase
-      .from('requests')
-      .insert({
-        profile_id: profileId,
-        type,
-        title,
-        description,
-        metadata,
-      })
-      .select()
-      .single();
+    const response = await fetch('/api/requests/my', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ profileId, type, title, description, metadata }),
+    })
 
-    if (error) {
-      console.error('Error in requestApi:', error.message, error.details, error.hint);
-      throw new Error(`Failed to process request: ${error.message}`);
+    if (!response.ok) {
+      const message = await response.text()
+      console.error('Error in requestApi:', message)
+      throw new Error(`Failed to process request: ${message}`)
     }
 
-    return data as Request;
+    return (await response.json()) as Request
   },
 
-  async getMyRequests(supabase: SupabaseClient, profileId: string): Promise<Request[]> {
-    const { data, error } = await supabase
-      .from('requests')
-      .select('*')
-      .eq('profile_id', profileId)
-      .order('created_at', { ascending: false });
+  async getMyRequests(_supabase: unknown, _profileId: string): Promise<Request[]> {
+    const response = await fetch('/api/requests/my')
 
-    if (error) {
-      console.error('Error in requestApi:', error.message, error.details, error.hint);
-      throw new Error(`Failed to process request: ${error.message}`);
+    if (!response.ok) {
+      const message = await response.text()
+      console.error('Error in requestApi:', message)
+      throw new Error(`Failed to process request: ${message}`)
     }
 
-    return data as Request[];
+    return (await response.json()) as Request[]
   },
 
-  async getAllRequests(supabase: SupabaseClient): Promise<RequestWithTrainee[]> {
-    const { data, error } = await supabase
-      .from('requests')
-      .select(`
-        *,
-        profile:profiles(full_name, email)
-      `)
-      .order('created_at', { ascending: false });
+  async getAllRequests(_supabase: unknown): Promise<RequestWithTrainee[]> {
+    const response = await fetch('/api/requests/admin')
 
-    if (error) {
-      console.error('Error in requestApi:', error.message, error.details, error.hint);
-      throw new Error(`Failed to process request: ${error.message}`);
+    if (!response.ok) {
+      const message = await response.text()
+      console.error('Error in requestApi:', message)
+      throw new Error(`Failed to process request: ${message}`)
     }
 
-    return data as unknown as RequestWithTrainee[];
+    return (await response.json()) as RequestWithTrainee[]
   },
 
   async updateRequestStatus(
-    supabase: SupabaseClient,
+    _supabase: unknown,
     requestId: string, 
     status: RequestStatus, 
     adminComment?: string
   ): Promise<Request> {
-    const { data, error } = await supabase
-      .from('requests')
-      .update({
-        status,
-        admin_comment: adminComment,
-        updated_at: new Date().toISOString(),
-      })
-      .eq('id', requestId)
-      .select()
-      .single();
+    const response = await fetch(`/api/requests/admin/${requestId}/status`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status, adminComment }),
+    })
 
-    if (error) {
-      console.error('Error in requestApi:', error.message, error.details, error.hint);
-      throw new Error(`Failed to process request: ${error.message}`);
+    if (!response.ok) {
+      const message = await response.text()
+      console.error('Error in requestApi:', message)
+      throw new Error(`Failed to process request: ${message}`)
     }
 
-    return data as Request;
+    return (await response.json()) as Request
   },
 
   async updateAdminComment(
-    supabase: SupabaseClient,
+    _supabase: unknown,
     requestId: string,
     adminComment: string
   ): Promise<Request> {
-    const { data, error } = await supabase
-      .from('requests')
-      .update({
-        admin_comment: adminComment,
-        updated_at: new Date().toISOString(),
-      })
-      .eq('id', requestId)
-      .select()
-      .single();
+    const response = await fetch(`/api/requests/admin/${requestId}/comment`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ adminComment }),
+    })
 
-    if (error) {
-      console.error('Error in requestApi:', error.message, error.details, error.hint);
-      throw new Error(`Failed to process request: ${error.message}`);
+    if (!response.ok) {
+      const message = await response.text()
+      console.error('Error in requestApi:', message)
+      throw new Error(`Failed to process request: ${message}`)
     }
 
-    return data as Request;
+    return (await response.json()) as Request
   },
 };

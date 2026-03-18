@@ -6,6 +6,8 @@ const isPublicRoute = createRouteMatcher([
   "/sign-in(.*)",
   "/sign-up(.*)",
   "/api/webhook(.*)", // For Supabase/Clerk sync
+  "/attendance/check-in(.*)", // QR scan page should be publicly reachable
+  "/api/attendance/scan(.*)", // QR scan validation endpoint
 ]);
 
 export default clerkMiddleware(async (auth, request) => {

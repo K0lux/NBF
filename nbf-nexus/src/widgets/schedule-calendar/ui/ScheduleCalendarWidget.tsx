@@ -4,6 +4,7 @@ import * as React from "react"
 import FullCalendar from "@fullcalendar/react"
 import dayGridPlugin from "@fullcalendar/daygrid"
 import interactionPlugin from "@fullcalendar/interaction"
+import frLocale from "@fullcalendar/core/locales/fr"
 import { useQuery, useQueryClient } from "@tanstack/react-query"
 import { format } from "date-fns"
 
@@ -13,6 +14,7 @@ import { AssignSlotModal } from "@/features/assign-schedule-slot/ui/AssignSlotMo
 import { Card, CardContent, CardHeader, CardTitle } from "@/shared/ui/card"
 import { Button } from "@/shared/ui/button"
 import { Plus } from "lucide-react"
+import { toast } from "sonner"
 
 export function ScheduleCalendarWidget() {
   const queryClient = useQueryClient()
@@ -46,6 +48,19 @@ export function ScheduleCalendarWidget() {
     })) || []
   }, [schedules])
 
+  const handleUnassign = async (scheduleId: string) => {
+    const confirmed = window.confirm("Desassigner ce stagiaire de ce jour ?")
+    if (!confirmed) return
+
+    try {
+      await scheduleApi.deleteScheduleEntry(scheduleId)
+      toast.success("Assignation supprimee")
+      queryClient.invalidateQueries({ queryKey: ["schedules"] })
+    } catch {
+      toast.error("Echec de la desassignation")
+    }
+  }
+
   return (
     <Card className="w-full">
       <CardHeader className="flex flex-row items-center justify-between">
@@ -60,12 +75,16 @@ export function ScheduleCalendarWidget() {
         <div className="calendar-container">
           <FullCalendar
             plugins={[dayGridPlugin, interactionPlugin]}
+            locale={frLocale}
             initialView="dayGridMonth"
             events={events}
             dateClick={handleDateClick}
             datesSet={handleDatesSet}
             eventContent={(eventInfo) => (
-              <ScheduleCalendarEvent schedule={eventInfo.event.extendedProps.schedule} />
+              <ScheduleCalendarEvent
+                schedule={eventInfo.event.extendedProps.schedule}
+                onUnassign={handleUnassign}
+              />
             )}
             headerToolbar={{
               left: "prev,next today",
@@ -87,24 +106,54 @@ export function ScheduleCalendarWidget() {
       <style jsx global>{`
         .fc {
           font-family: inherit;
+          color: var(--foreground);
+        }
+        .fc-theme-standard .fc-scrollgrid,
+        .fc-theme-standard td,
+        .fc-theme-standard th {
+          border-color: var(--border);
+          background: transparent;
+        }
+        .fc .fc-col-header-cell-cushion,
+        .fc .fc-daygrid-day-number,
+        .fc .fc-toolbar-title {
+          color: var(--foreground);
+        }
+        .fc .fc-col-header-cell {
+          background: color-mix(in oklab, var(--muted) 45%, transparent);
+        }
+        .fc .fc-col-header-cell-cushion {
+          font-weight: 600;
+          opacity: 0.95;
         }
         .fc .fc-button-primary {
           background-color: var(--primary);
           border-color: var(--primary);
+          color: var(--primary-foreground);
         }
         .fc .fc-button-primary:hover {
-          background-color: var(--primary-foreground);
-          color: var(--primary);
+          background-color: color-mix(in oklab, var(--primary) 85%, black);
+          border-color: color-mix(in oklab, var(--primary) 85%, black);
+          color: var(--primary-foreground);
+        }
+        .fc .fc-button-primary:focus,
+        .fc .fc-button-primary:active {
+          background-color: color-mix(in oklab, var(--primary) 80%, black);
+          border-color: color-mix(in oklab, var(--primary) 80%, black);
+          color: var(--primary-foreground);
         }
         .fc .fc-toolbar-title {
           font-size: 1.25rem;
           font-weight: 600;
         }
-        .fc-theme-standard td, .fc-theme-standard th {
-          border-color: var(--border);
-        }
         .fc .fc-daygrid-day.fc-day-today {
           background-color: var(--accent);
+        }
+        .fc .fc-daygrid-event,
+        .fc .fc-event {
+          background: transparent;
+          border: 0;
+          color: inherit;
         }
       `}</style>
     </Card>

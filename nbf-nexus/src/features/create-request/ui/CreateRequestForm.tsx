@@ -21,7 +21,6 @@ import { RequestType } from "@/entities/request/model/types"
 import { toast } from "sonner"
 import { Loader2 } from "lucide-react"
 import { useI18n } from "@/shared/lib/i18n/i18nContext"
-import { useSupabase } from "@/shared/lib/supabase/useSupabase"
 
 const formSchema = z.object({
   type: z.enum(["SCHEDULE_CHANGE", "PRESENTATION_SLOT"]),
@@ -38,7 +37,6 @@ interface CreateRequestFormProps {
 export function CreateRequestForm({ profileId, onSuccess }: CreateRequestFormProps) {
   const [loading, setLoading] = React.useState(false)
   const { t } = useI18n()
-  const supabase = useSupabase()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -54,7 +52,7 @@ export function CreateRequestForm({ profileId, onSuccess }: CreateRequestFormPro
     setLoading(true)
     try {
       await requestApi.createRequest(
-        supabase,
+        null,
         profileId,
         values.type as RequestType,
         values.title,

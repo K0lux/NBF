@@ -1,18 +1,14 @@
 import * as React from "react"
 import { auth } from "@clerk/nextjs/server"
 import { redirect } from "next/navigation"
-import { AIChatInterface } from "@/features/ai-chat/ui/AIChatInterface"
+import { AiPage } from "@/pages/ai"
 
-export default async function AIChatPage() {
+export default async function Page() {
   const { userId } = await auth()
 
   if (!userId) {
     redirect("/sign-in")
   }
 
-  return (
-    <div className="flex flex-col h-[calc(100vh-64px)] overflow-hidden">
-      <AIChatInterface />
-    </div>
-  )
+  return <AiPage />
 }

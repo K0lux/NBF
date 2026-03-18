@@ -36,18 +36,18 @@ export function AdminRequestListWidget() {
   const [editingCommentId, setEditingCommentId] = React.useState<string | null>(null)
   const [processing, setProcessing] = React.useState<string | null>(null)
 
-  const { data: requests, isLoading } = useQuery({
+  const { data: requests, isLoading, isError } = useQuery({
     queryKey: ["all-requests"],
-    queryFn: requestApi.getAllRequests,
+    queryFn: () => requestApi.getAllRequests(null),
   })
 
   const handleStatusUpdate = async (id: string, status: RequestStatus) => {
     setProcessing(id)
     try {
-      await requestApi.updateRequestStatus(id, status, commentMap[id])
+      await requestApi.updateRequestStatus(null, id, status, commentMap[id])
       toast.success(t("success_message"))
       queryClient.invalidateQueries({ queryKey: ["all-requests"] })
-    } catch (err) {
+    } catch {
       toast.error(t("error_message"))
     } finally {
       setProcessing(null)
@@ -57,11 +57,11 @@ export function AdminRequestListWidget() {
   const handleCommentUpdate = async (id: string) => {
     setProcessing(id)
     try {
-      await requestApi.updateAdminComment(id, commentMap[id])
+      await requestApi.updateAdminComment(null, id, commentMap[id])
       toast.success(t("success_message"))
       setEditingCommentId(null)
       queryClient.invalidateQueries({ queryKey: ["all-requests"] })
-    } catch (err) {
+    } catch {
       toast.error(t("error_message"))
     } finally {
       setProcessing(null)
@@ -85,6 +85,10 @@ export function AdminRequestListWidget() {
       <div className="grid gap-6">
         {isLoading ? (
           <div className="text-center py-20">{t("loading_requests")}</div>
+        ) : isError ? (
+          <div className="py-20 text-center text-destructive border-2 border-dashed rounded-lg">
+            {t("error_message")}
+          </div>
         ) : requests && requests.length > 0 ? (
           requests.map((request) => (
             <Card key={request.id} className={request.status === 'PENDING' ? "border-l-4 border-l-primary" : ""}>

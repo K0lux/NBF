@@ -12,6 +12,10 @@ export interface Trainee {
   start_date: string | null;
   end_date: string | null;
   role: UserRole;
+  access_level?: string;
+  is_archived?: boolean;
+  archived_at?: string | null;
+  admin_notes?: string | null;
   created_at: string;
   updated_at: string;
 }

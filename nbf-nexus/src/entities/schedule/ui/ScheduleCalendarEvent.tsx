@@ -2,11 +2,13 @@ import * as React from "react"
 import { ScheduleWithTrainee } from "../model/types";
 import { cn } from "@/shared/lib/utils";
 import { GenerateAttendanceQR } from "@/features/generate-attendance-qr/ui/GenerateAttendanceQR";
+import { Trash2 } from "lucide-react";
 
 interface ScheduleCalendarEventProps {
   schedule: ScheduleWithTrainee;
   className?: string;
   showQR?: boolean;
+  onUnassign?: (scheduleId: string) => void;
 }
 
 const specialtyStyles: Record<string, string> = {
@@ -15,7 +17,7 @@ const specialtyStyles: Record<string, string> = {
   NET_SEC: "bg-orange-100 text-orange-800 border-orange-200 dark:bg-orange-900/30 dark:text-orange-300 dark:border-orange-800",
 };
 
-export function ScheduleCalendarEvent({ schedule, className, showQR = true }: ScheduleCalendarEventProps) {
+export function ScheduleCalendarEvent({ schedule, className, showQR = true, onUnassign }: ScheduleCalendarEventProps) {
   const specialty = schedule.profile.specialty || "DEV";
   const style = specialtyStyles[specialty] || specialtyStyles.DEV;
 
@@ -35,12 +37,26 @@ export function ScheduleCalendarEvent({ schedule, className, showQR = true }: Sc
       </div>
 
       {showQR && (
-        <div className="flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity">
+        <div className="flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity flex items-center">
           <GenerateAttendanceQR 
             scheduleId={schedule.id}
             profileId={schedule.profile_id}
             traineeName={schedule.profile.full_name || "Trainee"}
           />
+          {onUnassign && (
+            <button
+              type="button"
+              aria-label="Unassign trainee from this date"
+              title="Unassign"
+              className="h-6 w-6 inline-flex items-center justify-center rounded hover:bg-destructive/10 text-destructive"
+              onClick={(event) => {
+                event.stopPropagation()
+                onUnassign(schedule.id)
+              }}
+            >
+              <Trash2 className="h-4 w-4" />
+            </button>
+          )}
         </div>
       )}
     </div>

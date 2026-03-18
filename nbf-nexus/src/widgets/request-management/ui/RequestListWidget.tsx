@@ -18,7 +18,6 @@ import { Button } from "@/shared/ui/button"
 import { CreateRequestForm } from "@/features/create-request/ui/CreateRequestForm"
 import { PlusCircle } from "lucide-react"
 import { useI18n } from "@/shared/lib/i18n/i18nContext"
-import { useSupabase } from "@/shared/lib/supabase/useSupabase"
 
 interface RequestListWidgetProps {
   profileId: string;
@@ -34,11 +33,10 @@ export function RequestListWidget({ profileId }: RequestListWidgetProps) {
   const queryClient = useQueryClient()
   const { t } = useI18n()
   const [modalOpen, setModalOpen] = React.useState(false)
-  const supabase = useSupabase()
 
-  const { data: requests, isLoading } = useQuery({
+  const { data: requests, isLoading, isError } = useQuery({
     queryKey: ["requests", profileId],
-    queryFn: () => requestApi.getMyRequests(supabase, profileId),
+    queryFn: () => requestApi.getMyRequests(null, profileId),
   })
 
   return (
@@ -76,6 +74,12 @@ export function RequestListWidget({ profileId }: RequestListWidgetProps) {
       <div className="grid gap-4">
         {isLoading ? (
           <div className="text-center py-10">{t("loading_requests")}</div>
+        ) : isError ? (
+          <Card className="border-dashed border-destructive/40">
+            <CardContent className="py-10 text-center text-destructive">
+              {t("error_message")}
+            </CardContent>
+          </Card>
         ) : requests && requests.length > 0 ? (
           requests.map((request) => (
             <Card key={request.id}>

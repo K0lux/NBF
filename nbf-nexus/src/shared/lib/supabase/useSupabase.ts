@@ -19,7 +19,18 @@ export function useSupabase() {
       {
         global: {
           fetch: async (url, options = {}) => {
-            const clerkToken = await getToken({ template: "supabase" })
+            let clerkToken: string | null = null
+            const jwtTemplate = env.NEXT_PUBLIC_CLERK_SUPABASE_JWT_TEMPLATE
+
+            if (jwtTemplate) {
+              try {
+                clerkToken = await getToken({ template: jwtTemplate })
+              } catch {
+                clerkToken = await getToken()
+              }
+            } else {
+              clerkToken = await getToken()
+            }
 
             const headers = new Headers(options.headers)
             if (clerkToken) {

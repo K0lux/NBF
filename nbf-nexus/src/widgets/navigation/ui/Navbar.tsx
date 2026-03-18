@@ -26,6 +26,14 @@ export function Navbar() {
   const { t } = useI18n()
   const [isOpen, setIsOpen] = React.useState(false)
 
+  React.useEffect(() => {
+    if (!isLoaded || !user?.id) return
+
+    fetch("/api/profile/sync", { method: "POST" }).catch(() => {
+      // Keep navbar resilient; profile sync failures are surfaced elsewhere.
+    })
+  }, [isLoaded, user?.id])
+
   // Hide Navbar if user is not authenticated
   if (isLoaded && !user) return null;
 
@@ -79,7 +87,7 @@ export function Navbar() {
 
           <div className="flex items-center gap-2">
             <ThemeToggle />
-            <Link href="/settings" className="hidden md:block">
+            <Link href={isAdmin ? "/admin/settings" : "/settings"} className="hidden md:block">
               <Button variant="ghost" size="icon" title={t("settings")}>
                 <Settings className="h-4 w-4" />
               </Button>
@@ -119,7 +127,7 @@ export function Navbar() {
             </Link>
           ))}
           <Link
-            href="/settings"
+            href={isAdmin ? "/admin/settings" : "/settings"}
             onClick={() => setIsOpen(false)}
             className={cn(
               "flex items-center gap-3 px-3 py-3 rounded-md text-base font-medium transition-colors",

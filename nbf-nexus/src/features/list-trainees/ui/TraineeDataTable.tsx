@@ -30,12 +30,14 @@ interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
   searchKey: string
+  onSelectedRowsChange?: (rows: TData[]) => void
 }
 
 export function TraineeDataTable<TData, TValue>({
   columns,
   data,
   searchKey,
+  onSelectedRowsChange,
 }: DataTableProps<TData, TValue>) {
   const { t } = useI18n()
   const [sorting, setSorting] = React.useState<SortingState>([])
@@ -45,10 +47,12 @@ export function TraineeDataTable<TData, TValue>({
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({})
   const [rowSelection, setRowSelection] = React.useState({})
+  const lastSelectionSignatureRef = React.useRef("")
 
   const table = useReactTable({
     data,
     columns,
+    enableRowSelection: true,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
     getCoreRowModel: getCoreRowModel(),
@@ -64,6 +68,17 @@ export function TraineeDataTable<TData, TValue>({
       rowSelection,
     },
   })
+
+  React.useEffect(() => {
+    if (!onSelectedRowsChange) return
+
+    const selectedRowsModel = table.getSelectedRowModel().rows
+    const selectionSignature = selectedRowsModel.map((row) => row.id).join("|")
+    if (selectionSignature === lastSelectionSignatureRef.current) return
+
+    lastSelectionSignatureRef.current = selectionSignature
+    onSelectedRowsChange(selectedRowsModel.map((row) => row.original))
+  }, [rowSelection, onSelectedRowsChange])
 
   return (
     <div className="w-full">
