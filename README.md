@@ -22,7 +22,7 @@ Today, it runs the hub. The AI Agent handles onboarding 24/7, and the system enf
 
 ---
 
-### 🚀 Key Features
+###  Key Features
 - **Smart Resource Allocation**: Strictly manages physical desk limits (ex: 12 chairs for 30+ people).
 - **AI Mentorship (RAG)**: An AI agent connected to your Google Drive/Docs to answer intern questions 24/7.
 - **Dynamic QR Attendance**: Fraud-proof attendance tracking via dynamic QR codes and Geolocation.
@@ -31,16 +31,16 @@ Today, it runs the hub. The AI Agent handles onboarding 24/7, and the system enf
 
 ---
 
-### 🏗️ Architecture: Feature-Sliced Design (FSD)
+###  Architecture: Feature-Sliced Design (FSD)
 NBF Nexus follows the **FSD** architectural pattern for maximum maintainability and scale:
-- [📖 Architecture Guide](nbf-nexus/docs/ARCHITECTURE.md)
-- [🧪 Testing Strategy](nbf-nexus/docs/TESTING.md)
-- [🛠️ Contributing Guide](nbf-nexus/docs/CONTRIBUTING.md)
-- [🧑‍🎓 User Guide](nbf-nexus/docs/USER_GUIDE.md)
+- [ Architecture Guide](nbf-nexus/docs/ARCHITECTURE.md)
+- [ Testing Strategy](nbf-nexus/docs/TESTING.md)
+- [ Contributing Guide](nbf-nexus/docs/CONTRIBUTING.md)
+- [ User Guide](nbf-nexus/docs/USER_GUIDE.md)
 
 ---
 
-### 🛠️ Quick Setup
+###  Quick Setup
 
 1. **Clone the repository**
    ```bash
@@ -62,7 +62,7 @@ NBF Nexus follows the **FSD** architectural pattern for maximum maintainability 
 
 ---
 
-### 📄 License
+###  License
 Distributed under the **MIT License**. See `LICENSE` for more information.
 
 ---
