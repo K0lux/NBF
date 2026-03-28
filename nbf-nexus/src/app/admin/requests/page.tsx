@@ -1,7 +1,7 @@
 import * as React from "react"
 import { auth, currentUser } from "@clerk/nextjs/server"
 import { redirect } from "next/navigation"
-import { AdminRequestsPage } from "@/pages/admin/requests"
+import { AdminRequestListWidget } from "@/widgets/request-management/ui/AdminRequestListWidget"
 
 export default async function Page() {
   const { userId } = await auth()
@@ -16,5 +16,9 @@ export default async function Page() {
     redirect("/")
   }
 
-  return <AdminRequestsPage />
+  return (
+    <main className="container mx-auto py-10 px-4">
+      <AdminRequestListWidget />
+    </main>
+  )
 }

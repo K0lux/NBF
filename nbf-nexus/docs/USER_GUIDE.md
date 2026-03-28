@@ -1,10 +1,10 @@
-# Guide Utilisateur - Stagiaire NBF Nexus 🚀
+# Guide Utilisateur - Stagiaire NBF Nexus
 
 Bienvenue sur **NBF Nexus**, ton compagnon quotidien pour gérer ton stage au hub. Ce guide t'explique comment utiliser les fonctionnalités clés.
 
 ---
 
-## 📅 1. Consulter ton Planning
+## 1. Consulter ton Planning
 Ton planning est mis à jour chaque semaine par l'administration.
 1. Connecte-toi sur l'application.
 2. Va dans la section **"Mon Planning"**.
@@ -13,7 +13,7 @@ Ton planning est mis à jour chaque semaine par l'administration.
 
 ---
 
-## 🕒 2. Pointer sa Présence (Check-in)
+## 2. Pointer sa Présence (Check-in)
 Le pointage est obligatoire pour valider tes heures de stage.
 
 ### Via QR Code (Sur site)
@@ -29,7 +29,7 @@ Le pointage est obligatoire pour valider tes heures de stage.
 
 ---
 
-## 🤖 3. Utiliser l'Assistant IA (Mentor Virtuel)
+## 3. Utiliser l'Assistant IA (Mentor Virtuel)
 Tu as une question sur ton rapport de stage, les outils du hub ou un process interne ?
 1. Va dans l'onglet **"Assistant IA"**.
 2. Pose ta question en langage naturel (ex: *"Quels sont les thèmes de projets disponibles ?"*).
@@ -38,7 +38,7 @@ Tu as une question sur ton rapport de stage, les outils du hub ou un process int
 
 ---
 
-## 📩 4. Faire une Demande (Workflows)
+## 4. Faire une Demande (Workflows)
 Besoin de changer un jour de planning ou d'une permission ?
 1. Va dans **"Mes Requêtes"**.
 2. Clique sur **"Nouvelle Demande"**.
@@ -47,7 +47,7 @@ Besoin de changer un jour de planning ou d'une permission ?
 
 ---
 
-## ⚙️ 5. Paramètres et Langue
+## 5. Paramètres et Langue
 Tu peux changer la langue de l'application (Français/Anglais) et tes préférences de notifications dans l'onglet **"Paramètres"**.
 
 ---

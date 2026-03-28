@@ -2,7 +2,7 @@
 
 NBF Nexus utilise le framework **Feature-Sliced Design (FSD)**. Cette méthodologie nous permet de découpler la logique métier de l'interface et de garantir qu'une modification dans une fonctionnalité n'en casse pas une autre.
 
-## 🏗 Les Couches (Layers)
+## Les Couches (Layers)
 
 ### 1. Shared (Socle Technique)
 Contient les éléments atomiques sans logique métier.

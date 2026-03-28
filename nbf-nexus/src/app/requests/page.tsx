@@ -1,7 +1,7 @@
 import * as React from "react"
 import { auth } from "@clerk/nextjs/server"
 import { redirect } from "next/navigation"
-import { RequestsPage } from "@/pages/requests"
+import { RequestListWidget } from "@/widgets/request-management/ui/RequestListWidget"
 
 export default async function Page() {
   const { userId } = await auth()
@@ -10,5 +10,9 @@ export default async function Page() {
     redirect("/sign-in")
   }
 
-  return <RequestsPage userId={userId} />
+  return (
+    <main className="container mx-auto py-10 px-4">
+      <RequestListWidget profileId={userId} />
+    </main>
+  )
 }

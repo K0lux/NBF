@@ -2,7 +2,7 @@
 
 Merci de vouloir contribuer à **NBF Nexus** ! Nous sommes un projet Open Source né au Togo 🇹🇬 et nous accueillons toutes les contributions.
 
-## 🛠 Installation Locale (Development)
+## Installation Locale (Development)
 
 ### Prérequis
 - **Node.js 20+**
@@ -12,7 +12,7 @@ Merci de vouloir contribuer à **NBF Nexus** ! Nous sommes un projet Open Source
 ### Étapes
 1. **Cloner le repo**
    ```bash
-   git clone https://github.com/K0lux/NBF.git
+   git clone https://github.com/K0lux/nbf-nexus.git
    cd nbf-nexus
    ```
 2. **Installation**

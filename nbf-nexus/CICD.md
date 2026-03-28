@@ -1,6 +1,6 @@
 # Stratégie CI/CD & DevOps - NBF Nexus
 
-## 🚀 Pipeline Overview
+## Pipeline Overview
 Notre pipeline est divisé en trois phases : **Vérification (CI)**, **Déploiement (CD)**, et **Maintenance**.
 
 ### 1. Intégration Continue (CI) - `.github/workflows/ci.yml`
@@ -21,7 +21,7 @@ Déclenché sur chaque PR vers `main`.
 
 ---
 
-## 🛠 Gestion de l'Infrastructure (Docker & Externes)
+## Gestion de l'Infrastructure (Docker & Externes)
 Pour garantir que les mises à jour de nos images Docker ne cassent pas le système :
 1. **Pinning** : Nous utilisons des versions spécifiques (ex: `node:20.11-alpine` et non `node:latest`).
 2. **Automated Updates** : Renovate ou Dependabot propose des PRs pour monter les versions.
@@ -29,7 +29,7 @@ Pour garantir que les mises à jour de nos images Docker ne cassent pas le syst�
 
 ---
 
-## 📋 Stratégie de Test & Documentation
+## Stratégie de Test & Documentation
 ### Tests
 - **Unitaires** : Logique métier dans `entities` et `shared/lib`.
 - **Intégration** : Interaction entre `features` et `widgets`.
@@ -42,7 +42,7 @@ Pour garantir que les mises à jour de nos images Docker ne cassent pas le syst�
 
 ---
 
-## 🚨 Incidents vs Bugs
+## Incidents vs Bugs
 | Type | Définition | Action |
 | :--- | :--- | :--- |
 | **Bug** | Dysfonctionnement fonctionnel | Issue standard -> Fix sur branche `fix/` |

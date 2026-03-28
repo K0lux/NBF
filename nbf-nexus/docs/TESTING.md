@@ -1,6 +1,6 @@
 # Guide de Test - NBF Nexus
 
-## 🧪 Pourquoi tester ?
+## Pourquoi tester ?
 Pour un projet Open Source, les tests sont la seule garantie que les contributions externes ne brisent pas le noyau de l'application.
 
 ---
@@ -41,5 +41,5 @@ Nous utilisons des tests automatisés pour vérifier que :
 - L'API de production rejette les requêtes sans Token Clerk.
 - Les politiques **RLS (Row Level Security)** de Supabase interdisent à un stagiaire de modifier le profil d'un autre via des appels directs à l'API.
 
-## 🚀 Workflow Git & CI
+## Workflow Git & CI
 Chaque Pull Request déclenche automatiquement la suite de tests via **GitHub Actions**. Un échec de test bloque la fusion (Merge).

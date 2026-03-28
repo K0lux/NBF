@@ -48,6 +48,3 @@ For every issue implemented, the following standards MUST be met:
 
 For detailed development steps, refer to the Master Plan in the `plans/` directory.
 
-
-
-Malipita@@123
